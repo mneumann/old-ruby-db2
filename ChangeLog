@@ -1,0 +1,30 @@
+=begin
+= ChangeLog for Ruby/DB2
+: 0.3
+* sqlsh.rb interactive SQL shell
+* Added CLI-functions:
+  SQLFreeStmt
+
+: 0.2
+* DBD driver for DB2 is available (show RAA under DBD/DB2)
+* added more examples
+* added README
+* Load path for require now prefixed by db2/
+* Changed directory layout and using setup.rb
+* Added following CLI-functions:
+    SQLDataSources, SQLColAttribute, SQLFetchScroll,
+    SQLTables
+* Now all datatypes in SQLGetData can be handled.
+
+: 0.1
+* Only the following CLI-functions are implemented: 
+    SQLAllocHandle, SQLFreeHandle, SQLConnect, SQLDisconnect,
+    SQLPrepare, SQLNumResultCols, SQLDescribeCol,
+    SQLExecDirect, SQLExecute, SQLRowCount, SQLFetch,
+    SQLGetData, SQLEndTran, SQLGetDiagRec.
+* No high-level interface!
+* Tested with DB2 7.1 on Suse Linux 6.3.
+
+= History
+  $Id: ChangeLog,v 1.1 2002/09/05 09:57:13 mneumann Exp $ 
+=end

@@ -1,0 +1,66 @@
+$Id: README,v 1.1 2002/09/05 09:57:13 mneumann Exp $
+
+Ruby/DB2: IBM DB2 Module for Ruby
+Copyright (C) 2001 by Michael Neumann (neumann@s-direktnet.de)
+Released under the same terms as Ruby itself.
+
+
+
+PREREQUISITES
+=============
+* IBM DB2 installed (with CLI), tested with DB2 V7.1 on Suse Linxu 6.3 and
+  DB2 UDB V6.1 for Windows 95/98/NT.
+* Ruby, only tested with Ruby 1.6.3, but should work with every version >= 1.6.
+* C-Compiler
+
+
+INSTALL
+=======
+To compile type the following:
+
+  ruby setup.rb config
+  ruby setup.rb setup
+
+If you get an error message that no libraries and header files were found, then
+you have to set DB2DIR to the correct path where DB2 was installed, e.g.:
+
+  export DB2DIR=/usr/IBMdb2/V7.1
+
+or under Cygwin and DB2 installed in C:\SQLLIB:
+
+  export DB2DIR=C:/SQLLIB
+
+To install, make sure you are the superuser (under UNIX type "su -l root")
+and then type:
+
+  ruby setup.rb install
+
+For more options on installation, type:
+
+  ruby setup.rb --help
+
+
+The DB2 library files are installed in your site_ruby directory,
+of the actual ruby-version (e.g. "site_ruby/1.6") under the 
+directory "db2" and the .so file under "$arch/db2", where $arch 
+is your architecure (e.g. i686-linux).
+
+
+DOCUMENTATION
+=============
+Not yet written.
+
+You should consult the DB2-CLI manual available from IBM's website and 
+look at the comments before each function in the file "ext/db2/db2cli.c". 
+
+The rule of thumb is that all parameters in the DB2-CLI manual which are 
+declared as "output" or "input/output" are returned by the function (in an array). 
+All input values which are of type HANDLE (HENV, HDBC, HSTMT...) are represented by 
+Integer parameters in the Ruby version.
+
+
+SAMPLES
+=======
+See directory "samples".
+
+
