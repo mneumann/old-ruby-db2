@@ -16,7 +16,7 @@
  *
  * Released under the same terms as Ruby itself.
  *
- * $Id: db2cli.c,v 1.3 2003/09/11 15:47:07 mneumann Exp $
+ * $Id: db2cli.c,v 1.4 2003/11/22 16:56:46 mneumann Exp $
  *
  */
 
@@ -885,8 +885,21 @@ db2_SQLGetData(argc, argv, self)
       /* TODO: How large can a BIGINT be? ==> expect 200 bytes, should be enought? */
       ptr = (SQLPOINTER) ALLOC_N(SQLCHAR, MAX(bl,200));
       CALL_SQL_GET_DATA(ptr, SQL_C_CHAR, bl);
-      RETVAL( rb_str_new(ptr, MIN(bl, strlen_or_indptr)) );
-      rc = rb_funcall(rc, rb_intern("to_i"), 0);
+
+      if (rc == SQL_SUCCESS || rc == SQL_SUCCESS_WITH_INFO) {
+        if (strlen_or_indptr == SQL_NULL_DATA) {
+          retval = objNull;
+        }
+        else {
+          /* convert string to integer */
+          retval = rb_str_new(ptr, MIN(bl, strlen_or_indptr));
+          retval = rb_funcall(retval, rb_intern("to_i"), 0); 
+        }
+      }
+      else {
+        retval = Qnil;
+      }
+
       free((void*)ptr);
       break;
 
