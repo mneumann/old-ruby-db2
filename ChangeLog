@@ -1,6 +1,9 @@
 =begin
 = ChangeLog for Ruby/DB2
 : 0.4
+* fixed bug in db2_SQLGetData, that caused the last character of a SQL_CHAR
+  column to be null (S. Veit)
+* fixes bug in SQLGetData that occurs for SQL_BIGINTs (S. Veit)
 * db2_SQLDataSources: remove null-termination if it exists (by S. Veit)
 * SQLColumns method added (by S. Veit)
 * Some SQL_XXX constants added (by S. Veit)
@@ -31,5 +34,5 @@
 * Tested with DB2 7.1 on Suse Linux 6.3.
 
 = History
-  $Id: ChangeLog,v 1.2 2003/09/11 15:47:06 mneumann Exp $ 
+  $Id: ChangeLog,v 1.3 2003/11/22 21:22:21 mneumann Exp $ 
 =end
