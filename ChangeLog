@@ -1,38 +1,51 @@
-=begin
-= ChangeLog for Ruby/DB2
-: 0.4
+== Ruby/DB2 0.4.1
+
+* fixes missing constants (Maik Schmidt)
+
+== Ruby/DB2 0.4
+
 * fixed bug in db2_SQLGetData, that caused the last character of a SQL_CHAR
   column to be null (S. Veit)
+
 * fixes bug in SQLGetData that occurs for SQL_BIGINTs (S. Veit)
+
 * db2_SQLDataSources: remove null-termination if it exists (by S. Veit)
+
 * SQLColumns method added (by S. Veit)
+
 * Some SQL_XXX constants added (by S. Veit)
 
-: 0.3
-* sqlsh.rb interactive SQL shell
-* Added CLI-functions:
-  SQLFreeStmt
+== Ruby/DB2 0.3
 
-: 0.2
+* sqlsh.rb interactive SQL shell
+
+* Added CLI-functions: SQLFreeStmt
+
+== Ruby/DB2 0.2
+
 * DBD driver for DB2 is available (show RAA under DBD/DB2)
+
 * added more examples
+
 * added README
+
 * Load path for require now prefixed by db2/
+
 * Changed directory layout and using setup.rb
-* Added following CLI-functions:
-    SQLDataSources, SQLColAttribute, SQLFetchScroll,
-    SQLTables
+
+* Added following CLI-functions: SQLDataSources, SQLColAttribute, SQLFetchScroll,
+  SQLTables
+
 * Now all datatypes in SQLGetData can be handled.
 
-: 0.1
-* Only the following CLI-functions are implemented: 
-    SQLAllocHandle, SQLFreeHandle, SQLConnect, SQLDisconnect,
-    SQLPrepare, SQLNumResultCols, SQLDescribeCol,
-    SQLExecDirect, SQLExecute, SQLRowCount, SQLFetch,
-    SQLGetData, SQLEndTran, SQLGetDiagRec.
-* No high-level interface!
-* Tested with DB2 7.1 on Suse Linux 6.3.
+== Ruby/DB2 0.1
 
-= History
-  $Id: ChangeLog,v 1.3 2003/11/22 21:22:21 mneumann Exp $ 
-=end
+* Only the following CLI-functions are implemented: 
+  SQLAllocHandle, SQLFreeHandle, SQLConnect, SQLDisconnect,
+  SQLPrepare, SQLNumResultCols, SQLDescribeCol,
+  SQLExecDirect, SQLExecute, SQLRowCount, SQLFetch,
+  SQLGetData, SQLEndTran, SQLGetDiagRec.
+
+* No high-level interface!
+
+* Tested with DB2 7.1 on Suse Linux 6.3.
