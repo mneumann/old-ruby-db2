@@ -3,18 +3,20 @@
  *
  * File:   db2cli.c
  *
- * Author: Michael Neumann (mneumann@fantasy-coders.de)
+ * Author: Michael Neumann (mneumann@ntecs.de)
  *
  * Contributors: 
  *
  *   Songsu Yun (yuns@us.ibm.com)
  *
+ *   Stephen R. Veit (sveit@tradeharbor.com)
  *
- * Copyright (c) 2001, 2002 by Michael Neumann.
+ *
+ * Copyright (c) 2001, 2002, 2003 by Michael Neumann.
  *
  * Released under the same terms as Ruby itself.
  *
- * $Id: db2cli.c,v 1.2 2002/12/20 10:04:58 mneumann Exp $
+ * $Id: db2cli.c,v 1.3 2003/09/11 15:47:07 mneumann Exp $
  *
  */
 
@@ -166,6 +168,12 @@ db2_SQLDataSources(self, environment_handle, direction,
      sn_length = 0;
      ds_length = 0;
   }
+
+  /* Remove null-termination if it exists. Added by sveit. */
+  if (sn_length > 0 && server_name[sn_length - 1] == 0)
+      sn_length--;
+  if (ds_length > 0 && description[ds_length - 1] == 0)
+      ds_length--;
 
   retval = rb_ary_new3(
     5,
@@ -1144,6 +1152,48 @@ db2_SQLSetCursorName(self, statement_handle, name)
   return TO_RUBY_INT(rc);
 }
 
+
+/*******************************************************
+ SQLColumns
+ =======================================================
+ PARAMS:   statement_handle : Integer,
+           catalog_name     : String,    (must be set to "")
+           schema_name      : String,
+           table_name       : String,
+           column_name      : String
+
+ RETURNS:  rc : Integer
+********************************************************/
+
+static VALUE
+db2_SQLColumns(self, statement_handle, catalog_name, schema_name,
+              table_name, column_name)
+  VALUE self;
+  VALUE statement_handle, catalog_name, schema_name;
+  VALUE table_name, column_name;
+{
+  SQLRETURN rc;
+
+  MUST_BE_STRING(catalog_name);
+  MUST_BE_STRING(schema_name);
+  MUST_BE_STRING(table_name);
+  MUST_BE_STRING(column_name);
+
+  rc = SQLColumns(
+    (SQLHSTMT)     TO_C_INT(statement_handle),
+    (SQLCHAR *FAR) RSTRING(catalog_name)->ptr,
+    (SQLSMALLINT)  RSTRING(catalog_name)->len,
+    (SQLCHAR *FAR) RSTRING(schema_name)->ptr,
+    (SQLSMALLINT)  RSTRING(schema_name)->len,
+    (SQLCHAR *FAR) RSTRING(table_name)->ptr,
+    (SQLSMALLINT)  RSTRING(table_name)->len,
+    (SQLCHAR *FAR) RSTRING(column_name)->ptr,
+    (SQLSMALLINT)  RSTRING(column_name)->len
+  );
+
+  return TO_RUBY_INT(rc);
+}
+
 /* Init */
 
 void Init_db2cli() {
@@ -1178,6 +1228,7 @@ void Init_db2cli() {
   rb_define_module_function(mDB2CLI, "SQLGetDiagRec",    db2_SQLGetDiagRec,    4);
 
   rb_define_module_function(mDB2CLI, "SQLTables",        db2_SQLTables,        5);
+  rb_define_module_function(mDB2CLI, "SQLColumns",       db2_SQLColumns,       5);
   rb_define_module_function(mDB2CLI, "SQLBindParameter", db2_SQLBindParameter, 6);
   rb_define_module_function(mDB2CLI, "SQLSetCursorName", db2_SQLSetCursorName, 2);
   rb_define_module_function(mDB2CLI, "SQLGetCursorName", db2_SQLGetCursorName, 1);

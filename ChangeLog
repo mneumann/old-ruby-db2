@@ -1,5 +1,10 @@
 =begin
 = ChangeLog for Ruby/DB2
+: 0.4
+* db2_SQLDataSources: remove null-termination if it exists (by S. Veit)
+* SQLColumns method added (by S. Veit)
+* Some SQL_XXX constants added (by S. Veit)
+
 : 0.3
 * sqlsh.rb interactive SQL shell
 * Added CLI-functions:
@@ -26,5 +31,5 @@
 * Tested with DB2 7.1 on Suse Linux 6.3.
 
 = History
-  $Id: ChangeLog,v 1.1 2002/09/05 09:57:13 mneumann Exp $ 
+  $Id: ChangeLog,v 1.2 2003/09/11 15:47:06 mneumann Exp $ 
 =end
