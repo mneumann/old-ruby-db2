@@ -16,7 +16,7 @@
  *
  * Released under the same terms as Ruby itself.
  *
- * $Id: db2cli.c,v 1.4 2003/11/22 16:56:46 mneumann Exp $
+ * $Id: db2cli.c,v 1.5 2003/11/22 21:02:56 mneumann Exp $
  *
  */
 
@@ -843,8 +843,8 @@ db2_SQLGetData(argc, argv, self)
     case SQL_DECIMAL:
     case SQL_NUMERIC:
 
-      ptr = (SQLPOINTER) ALLOC_N(SQLCHAR, bl);
-      CALL_SQL_GET_DATA(ptr, SQL_C_CHAR, bl);
+      ptr = (SQLPOINTER) ALLOC_N(SQLCHAR, bl + 1);
+      CALL_SQL_GET_DATA(ptr, SQL_C_CHAR, bl + 1);
       RETVAL( rb_str_new(ptr, MIN(bl, strlen_or_indptr)) );
 
       free((void*)ptr);
