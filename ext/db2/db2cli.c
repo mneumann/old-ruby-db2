@@ -12,11 +12,9 @@
  *   Stephen R. Veit (sveit@tradeharbor.com)
  *
  *
- * Copyright (c) 2001, 2002, 2003 by Michael Neumann.
+ * Copyright (c) 2001-2004 by Michael Neumann.
  *
  * Released under the same terms as Ruby itself.
- *
- * $Id: db2cli.c,v 1.5 2003/11/22 21:02:56 mneumann Exp $
  *
  */
 
@@ -1213,6 +1211,7 @@ void Init_db2cli() {
   mDB2CLI = rb_eval_string("DB2CLI");
 
   #include "constants.h"
+  #include "version.h"
 
   rb_define_module_function(mDB2CLI, "SQLAllocHandle",   db2_SQLAllocHandle,   2);
   rb_define_module_function(mDB2CLI, "SQLFreeHandle",    db2_SQLFreeHandle,    2);

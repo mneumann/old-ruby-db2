@@ -1,3 +1,7 @@
+== Ruby/DB2 0.4.2
+
+* added constant DB2CLI::VERSION
+
 == Ruby/DB2 0.4.1
 
 * fixes missing constants (Maik Schmidt)
