@@ -1,7 +1,5 @@
-$Id: README,v 1.1 2002/09/05 09:57:13 mneumann Exp $
-
 Ruby/DB2: IBM DB2 Module for Ruby
-Copyright (C) 2001 by Michael Neumann (neumann@s-direktnet.de)
+Copyright (C) 2001 by Michael Neumann (mneumann@ntecs.de)
 Released under the same terms as Ruby itself.
 
 
